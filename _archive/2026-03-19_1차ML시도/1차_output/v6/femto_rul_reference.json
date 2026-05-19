@@ -1,0 +1,11 @@
+{
+  "bearing": "Bearing1_1",
+  "total_files": 2803,
+  "normal_rms": 0.5804,
+  "failure_threshold": 2.9021,
+  "failure_idx": 2748,
+  "onset_idx": 1299,
+  "failure_ratio": 0.9804,
+  "onset_ratio": 0.4634,
+  "note": "RUL 라벨링 기준 참조용. 학습 데이터 아님."
+}

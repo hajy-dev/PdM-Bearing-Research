@@ -1,0 +1,30 @@
+{
+  "sklearn": "1.8.0",
+  "xgboost": "3.2.0",
+  "python": "3.11.14 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 18:30:03) [MSC v.1929 64 bit (AMD64)]",
+  "trained_at": "2026-04-15T17:22:54.627664",
+  "random_state": 42,
+  "task": "fault_3class",
+  "best_model": "xgb",
+  "best_params": {
+    "n_estimators": 293,
+    "max_depth": 7,
+    "learning_rate": 0.2973121808843032,
+    "reg_lambda": 9.197881500156948,
+    "min_child_weight": 1,
+    "subsample": 0.8281968536497375,
+    "colsample_bytree": 0.7445074929276155
+  },
+  "n_rows": 28054,
+  "n_equipments": 14,
+  "classes": [
+    "BEARING_FAULT",
+    "COMPOUND_FAULT",
+    "MOTOR_FAULT"
+  ],
+  "features": [
+    "vibration",
+    "temperature",
+    "motor_current"
+  ]
+}

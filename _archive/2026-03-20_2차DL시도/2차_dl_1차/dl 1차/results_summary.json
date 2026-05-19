@@ -1,0 +1,13 @@
+{
+  "lstm": {
+    "r2": 0.3244107421023834
+  },
+  "cnn": {
+    "report_summary": "                  precision    recall  f1-score   support\n\n      ball_fault       1.00      1.00      1.00     31292\ninner_race_fault       1.00      1.00      1.00     31293\nouter_race_fault       0.99      0.99      0.99     31293\n\n        accuracy                           1.00     93878\n       m"
+  },
+  "autoencoder_v2": {
+    "threshold": 7.865588665008545
+  },
+  "elapsed_hours": 9.95,
+  "finished_at": "2026-03-21 06:39:49"
+}

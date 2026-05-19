@@ -1,0 +1,41 @@
+# 데이터셋·캐시 (절대 커밋 X)
+data/
+datasets/
+weather_cache/
+*.csv
+*.parquet
+*.h5
+*.tar.gz
+
+# 모델 가중치·바이너리
+*.pt
+*.pth
+*.onnx
+*.pkl
+*.npy
+# joblib은 작은 배포 모델만 허용 (experiments/CLF/02_*/results/)
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+._*
+
+# 로그·임시
+*.log
+logs/
+tmp/

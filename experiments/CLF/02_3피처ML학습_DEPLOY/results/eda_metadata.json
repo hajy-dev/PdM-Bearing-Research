@@ -1,0 +1,18 @@
+{
+  "n_rows": 221880,
+  "n_equipment": 24,
+  "fault_classes": [
+    "BEARING_FAULT",
+    "COMPOUND_FAULT",
+    "MONITORING",
+    "MOTOR_FAULT",
+    "NORMAL"
+  ],
+  "risk_classes": [
+    "CRITICAL",
+    "HIGH",
+    "LOW",
+    "MEDIUM"
+  ],
+  "low_normal_row_pct": 100.0
+}

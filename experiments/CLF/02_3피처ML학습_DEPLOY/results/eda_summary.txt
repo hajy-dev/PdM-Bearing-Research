@@ -1,0 +1,194 @@
+[1] shape=(221880, 10)
+    columns=['log_id', 'equipment_id', 'vibration', 'temperature', 'motor_current', 'is_anomaly', 'anomaly_score', 'fault_type', 'risk_level', 'recorded_at']
+    dtypes:
+log_id             int64
+equipment_id       int64
+vibration        float64
+temperature      float64
+motor_current    float64
+is_anomaly           str
+anomaly_score    float64
+fault_type           str
+risk_level           str
+recorded_at          str
+dtype: object
+    nulls:
+log_id           0
+equipment_id     0
+vibration        0
+temperature      0
+motor_current    0
+is_anomaly       0
+anomaly_score    0
+fault_type       0
+risk_level       0
+recorded_at      0
+dtype: int64
+
+[2] risk_level 분포 (count)
+risk_level
+LOW         188377
+CRITICAL     14921
+HIGH         13617
+MEDIUM        4965
+
+    risk_level 분포 (%)
+risk_level
+LOW         84.90
+CRITICAL     6.72
+HIGH         6.14
+MEDIUM       2.24
+
+    fault_type 분포 (count)
+fault_type
+NORMAL            188377
+COMPOUND_FAULT     14533
+MOTOR_FAULT         7658
+BEARING_FAULT       5863
+MONITORING          5449
+
+    fault_type 분포 (%)
+fault_type
+NORMAL            84.90
+COMPOUND_FAULT     6.55
+MOTOR_FAULT        3.45
+BEARING_FAULT      2.64
+MONITORING         2.46
+
+    fault_type 클래스 목록: ['BEARING_FAULT', 'COMPOUND_FAULT', 'MONITORING', 'MOTOR_FAULT', 'NORMAL']
+    risk_level 클래스 목록: ['CRITICAL', 'HIGH', 'LOW', 'MEDIUM']
+
+[3-a] risk_level × fault_type (count)
+fault_type  BEARING_FAULT  COMPOUND_FAULT  MONITORING  MOTOR_FAULT  NORMAL     All
+risk_level                                                                        
+CRITICAL                2            7261           0         7658       0   14921
+HIGH                 5861            7258         498            0       0   13617
+LOW                     0               0           0            0  188377  188377
+MEDIUM                  0              14        4951            0       0    4965
+All                  5863           14533        5449         7658  188377  221880
+
+[3-a'] risk_level × fault_type (row %)
+fault_type  BEARING_FAULT  COMPOUND_FAULT  MONITORING  MOTOR_FAULT  NORMAL
+risk_level                                                                
+CRITICAL             0.01           48.66        0.00        51.32     0.0
+HIGH                43.04           53.30        3.66         0.00     0.0
+LOW                  0.00            0.00        0.00         0.00   100.0
+MEDIUM               0.00            0.28       99.72         0.00     0.0
+
+    >>> (B) 전제 검증: risk=LOW 행 중 fault=NORMAL 비율 = 100.0%
+    >>> 전제 성립 (≥99.5%): 계층 파이프라인 안전
+
+[3-b] equipment_id × risk_level
+risk_level    CRITICAL  HIGH   LOW  MEDIUM
+equipment_id                              
+1                    0     0  9244       1
+2                    0     0  9245       0
+3                    0     0  9245       0
+4                    0     0  9245       0
+5                    0     0  9245       0
+6                    0     0  9245       0
+7                    0     0  9245       0
+8                    0     0  9242       3
+9                    0     0  9245       0
+10                   0     0  9245       0
+11                   0   480  7946     819
+12                   0   480  7824     941
+13                   2   478  7822     943
+14                 438    42  8267     498
+15                 458    22  8226     539
+16                 405    82  8148     610
+17                 409    92  8134     610
+18                   1  3600  5644       0
+19                   1  3746  5497       1
+20                   4  2961  6280       0
+21                2885   170  6190       0
+22                4054   268  4923       0
+23                3115   598  5532       0
+24                3149   598  5498       0
+
+[3-c] equipment_id × fault_type
+fault_type    BEARING_FAULT  COMPOUND_FAULT  MONITORING  MOTOR_FAULT  NORMAL
+equipment_id                                                                
+1                         0               0           1            0    9244
+2                         0               0           0            0    9245
+3                         0               0           0            0    9245
+4                         0               0           0            0    9245
+5                         0               0           0            0    9245
+6                         0               0           0            0    9245
+7                         0               0           0            0    9245
+8                         0               0           3            0    9242
+9                         0               0           0            0    9245
+10                        0               0           0            0    9245
+11                      233             247         819            0    7946
+12                      234             246         941            0    7824
+13                      221             259         943            0    7822
+14                        0              13         540          425    8267
+15                        0              12         561          446    8226
+16                        0             501         596            0    8148
+17                        0             501         610            0    8134
+18                     1808            1793           0            0    5644
+19                     1894            1853           1            0    5497
+20                     1473            1491           1            0    6280
+21                        0              71         167         2817    6190
+22                        0              86         266         3970    4923
+23                        0            3713           0            0    5532
+24                        0            3747           0            0    5498
+
+[4-a] risk_level 별 피처 통계
+           vibration                                             temperature                                                   motor_current                                                  
+               count   mean    std   min   25%   50%   75%   max       count    mean    std    min    25%    50%    75%    max         count    mean    std    min    25%    50%    75%    max
+risk_level                                                                                                                                                                                    
+CRITICAL     14921.0  1.427  0.952  0.11  0.54  0.76  2.35  7.59     14921.0  81.987  4.584  58.30  78.51  82.22  85.43  96.71       14921.0  42.540  2.213  35.07  41.05  42.53  44.03  52.05
+HIGH         13617.0  5.813  1.909  0.10  5.59  6.34  6.97  9.49     13617.0  62.330  6.594  48.96  58.26  60.63  63.49  88.01       13617.0  29.935  5.318  18.24  26.83  28.41  30.43  49.68
+LOW         188377.0  0.468  0.110  0.09  0.39  0.46  0.54  0.80    188377.0  42.766  3.625  30.10  40.03  42.76  45.46  57.67      188377.0  15.397  1.488  10.17  14.30  15.37  16.44  20.00
+MEDIUM        4965.0  0.800  0.174  0.25  0.71  0.83  0.90  1.90      4965.0  47.827  4.180  34.81  45.23  47.77  50.55  72.97        4965.0  18.491  2.427  12.47  16.63  18.12  20.43  34.80
+
+[4-b] fault_type 별 피처 통계
+               vibration                                              temperature                                                   motor_current                                                  
+                   count   mean    std   min    25%   50%   75%   max       count    mean    std    min    25%    50%    75%    max         count    mean    std    min    25%    50%    75%    max
+fault_type                                                                                                                                                                                         
+BEARING_FAULT     5863.0  6.487  0.820  3.17  5.925  6.49  7.04  9.39      5863.0  57.493  1.896  48.96  56.46  57.84  59.01  60.00        5863.0  27.845  2.129  20.13  26.39  27.80  29.29  36.90
+COMPOUND_FAULT   14533.0  3.992  2.177  0.80  2.220  2.64  6.28  9.49     14533.0  71.800  8.188  60.00  62.72  74.96  78.69  92.71       14533.0  36.968  7.601  20.50  28.81  40.82  43.42  52.05
+MONITORING        5449.0  0.772  0.199  0.10  0.630  0.82  0.89  6.37      5449.0  50.601  9.732  34.81  45.53  48.27  51.51  88.01        5449.0  20.554  7.027  12.47  16.77  18.63  20.79  47.22
+MOTOR_FAULT       7658.0  0.544  0.119  0.11  0.460  0.54  0.63  0.80      7658.0  85.304  2.766  80.00  83.24  85.15  87.17  96.71        7658.0  42.002  2.104  35.07  40.56  42.00  43.44  49.59
+NORMAL          188377.0  0.468  0.110  0.09  0.390  0.46  0.54  0.80    188377.0  42.766  3.625  30.10  40.03  42.76  45.46  57.67      188377.0  15.397  1.488  10.17  14.30  15.37  16.44  20.00
+
+[5] tick 버킷(장비별 5분위) × risk_level (row %)
+risk_level   CRITICAL  HIGH    LOW  MEDIUM
+tick_bucket                               
+Q1               7.22  6.94  85.27    0.56
+Q2               6.63  5.09  87.06    1.22
+Q3               5.54  7.17  84.62    2.67
+Q4               6.97  4.89  83.41    4.73
+Q5               7.26  6.59  84.14    2.01
+
+[6] 장비별 요약
+              n_rows  n_risk  n_fault
+equipment_id                         
+1               9245       2        2
+2               9245       1        1
+3               9245       1        1
+4               9245       1        1
+5               9245       1        1
+6               9245       1        1
+7               9245       1        1
+8               9245       2        2
+9               9245       1        1
+10              9245       1        1
+11              9245       3        4
+12              9245       3        4
+13              9245       4        4
+14              9245       4        4
+15              9245       4        4
+16              9245       4        3
+17              9245       4        3
+18              9245       3        3
+19              9245       4        4
+20              9245       3        4
+21              9245       3        4
+22              9245       3        4
+23              9245       3        2
+24              9245       3        2
+
+[7] equipment_id 수=24
+    목록=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
